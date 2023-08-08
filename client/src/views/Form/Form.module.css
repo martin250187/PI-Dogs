@@ -1,0 +1,75 @@
+.container {
+  position: relative;
+  top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 98%;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5em;
+  padding: 1em;
+}
+img{
+  border-radius: 50%;
+  margin-top: 0.5em;
+}
+label{
+  position: relative;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+}
+.btn{
+  position: relative;
+  width: 100%;
+  margin: 0.5em 0 0.5em 0;
+  padding: 0.5em;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border-radius: 1em;
+}
+.containerInput{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+input:focus{
+  border-color: 1px solid black;
+  outline: 2px solid black;
+}
+
+.errorMsj{
+  color: white;
+  background-color: rgb(129, 11, 11);
+  padding: 0.5em;
+  border-radius: 1em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+.success{
+  position: relative;
+  margin: 0.5em 0 0.5em 0;
+  width: 100%;
+  padding: 0.3em;
+  right: 0.5em;
+  border: 2px solid rgba(0, 128, 0, 0.8);
+}
+.error{
+  position: relative;
+  margin: 0.5em 0 0.5em 0;
+  width: 100%;
+  padding: 0.3em;
+  right: 0.5em;
+  border: 2px solid rgba(129, 11, 11, 0.8);
+}

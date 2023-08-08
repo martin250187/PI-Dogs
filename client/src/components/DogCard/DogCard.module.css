@@ -1,0 +1,46 @@
+.containerCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: .3rem lightgray solid;
+  border-radius: 10px;
+  margin: 10px;
+  transition: transform 0.5s;
+  padding: .5rem;
+  max-width: 30%;
+  min-width: 150px;
+  text-align: center;
+}
+.containerCard:hover {
+  background-color: rgba(197, 197, 197, 0.3);
+  transform: scale(1.1);
+  border: .3rem lightgray solid;
+  cursor: pointer;
+}
+.button {
+  cursor: pointer;
+  align-self: flex-end;
+  width: 1.5rem;
+  padding: 0.2rem;
+  transition: 0.5s;
+}
+.button:hover {
+  border-radius: 50%;
+}
+.box {
+  color: aliceblue;
+  margin: 0 0 0.5em 0;
+}
+.img {
+  border-radius: 50%;
+  width: 100%;
+}
+.name {
+  color: black;
+  text-decoration: underline;
+}
+.containerBtn{
+  width: 100%;
+  margin: 0.5em 0 0 0.5em;
+}

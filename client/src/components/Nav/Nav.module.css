@@ -1,0 +1,27 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 4em;
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+}
+.containerBtn {
+  margin: 0.5em;
+}
+.navBtn {
+  padding: 5px;
+  width: 100px;
+  margin: 0 1em 0 0;
+  border: 0.1em solid darkgray;
+  border-radius: 5%;
+}
+.navBtn:hover {
+  cursor: pointer;
+  background-color: darkgray;
+  border: 0.1em solid darkgray;
+  border-radius: 5%;
+}
