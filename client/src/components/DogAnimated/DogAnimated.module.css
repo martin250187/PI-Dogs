@@ -1,0 +1,30 @@
+.dogContainer {
+  width: 100vw; /* Ancho de la pantalla */
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  overflow: hidden; /* Oculta el desbordamiento */
+}
+.dog {
+  width: 100px;
+  height: 100px;
+  background-color: none;
+  border-radius: 50%;
+  position: relative;
+  animation: run 12s linear infinite;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@keyframes run {
+  0% {
+    transform: translateX(calc(0vw));
+  }
+  100% {
+    transform: translateX(calc(100vw));
+  }
+}

@@ -9,8 +9,11 @@ const cleanArray = (arr) =>
     return {
       id: e.id,
       name: e.name,
-      height: e.height.metric,
-      weight: e.weight.metric,
+      breed_group: e.breed_group,
+      height_min: parseInt(e.height.metric.slice(0, 2).trim()),
+      height_max: parseInt(e.height.metric.slice(4).trim()),
+      weight_min: parseInt(e.weight.metric.slice(0, 2).trim()),
+      weight_max: parseInt(e.weight.metric.slice(4).trim()),
       life_span: e.life_span,
       temperaments: e.temperament,
       image: e.image.url,
@@ -51,14 +54,23 @@ const getDogById = async (id, source) => {
     );
     dog = cleanArray(dogApi);
   } else
-    dog = [await Dog.findByPk(id, {
-      include: { model: Temperament, attributes: ["name"] },
-    })];
+    dog = [
+      await Dog.findByPk(id, {
+        include: { model: Temperament, attributes: ["name"] },
+      }),
+    ];
 
   return dog;
 };
 
-const createDog = async ({ name, height, weight, life_span, temperaments, image }) => {
+const createDog = async ({
+  name,
+  height,
+  weight,
+  life_span,
+  temperaments,
+  image,
+}) => {
   const newDog = await Dog.create({
     name,
     height,

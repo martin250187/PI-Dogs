@@ -29,15 +29,17 @@ const getDogHandler = async (req, res) => {
 
 const createDogHandler = async (req, res) => {
   try {
-    const { name, height, weight, life_span, image } = req.body;
+    const { name, height_min, height_max, weight_min, weight_max, life_span, image } = req.body;
     await createDog({
       name,
-      height,
-      weight,
+      height_min,
+      height_max,
+      weight_min,
+      weight_max,
       life_span,
       image,
     });
-    res.status(201).send("Saved Data");
+    res.status(201).send("Your dog has been created successfully");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -1,16 +1,31 @@
 import React from "react";
-import axios from "axios"
+import axios from "axios";
 import style from "./Form.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import validate from "./validation";
+import { useSelector, useDispatch } from "react-redux";
+import { getTemperaments } from "../../redux/actions";
+import Dog from "../../components/DogAnimated/DogAnimated";
 
 const Form = () => {
+  const temperaments = useSelector((state) => state.temperaments).sort(
+    function (a, b) {
+      if (a < b) return -1;
+      else return 1;
+    }
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTemperaments());
+  }, [dispatch]);
+
   const [dogData, setDogData] = useState({
     name: "",
-    height: "",
-    weight: "",
-    life_span: "",
-    temperaments:"",
+    height_min: "",
+    height_max: "",
+    weight_min: "",
+    weight_max: "",
+    temperaments: [],
     image: "",
   });
 
@@ -19,9 +34,23 @@ const Form = () => {
     height: "",
     weight: "",
     life_span: "",
-    temperaments:"",
+    temperaments: "",
     image: "",
   });
+
+  function handleSelect(e) {
+    setDogData({
+      ...dogData,
+      temperaments: [...dogData.temperaments, e.target.value],
+    });
+  }
+
+  function handleDelete(el) {
+    setDogData({
+      ...dogData,
+      temperaments: dogData.temperaments.filter((temp) => temp !== el),
+    });
+  }
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -38,8 +67,8 @@ const Form = () => {
   };
   return (
     <div className={style.container}>
+      <Dog/>
       <form className={style.form} onSubmit={handleSubmit}>
-        {/*<img src={animation} alt="NO FOUND" />*/}
         <div>
           <div className={style.containerInput}>
             <label htmlFor="name">Name</label>
@@ -48,35 +77,57 @@ const Form = () => {
               name="name"
               value={dogData.name}
               onChange={handleChange}
-              className={errors.name? style.error : style.success}
+              className={errors.name ? style.error : style.success}
             />
             <span className={errors.name ? style.errorMsj : null}>
               {errors.name}
             </span>
           </div>
           <div className={style.containerInput}>
-            <label htmlFor="height">Height</label>
+            <h4>Heights (cm)</h4>
+            <div className={style.heightInput}>
+            <label htmlFor="height_min">Min</label>
             <input
-              type="text"
-              name="height"
-              value={dogData.height}
+              type="number"
+              name="height_min"
+              value={dogData.height_min}
               onChange={handleChange}
               className={errors.height ? style.error : style.success}
             />
-            <span className={errors.height ? style.errorMsj : null}>
+            <label htmlFor="height_max">Max</label>
+            <input
+              type="number"
+              name="height_max"
+              value={dogData.height_max}
+              onChange={handleChange}
+              className={errors.height ? style.error : style.success}
+            />
+            </div>
+            <span className={errors.height? style.errorMsj : null}>
               {errors.height}
             </span>
           </div>
           <div className={style.containerInput}>
-            <label htmlFor="weight">Weight</label>
+            <h4>Weight (kg.)</h4>
+            <div className={style.heightInput}>
+            <label htmlFor="weight_min">Min</label>
             <input
-              type="text"
-              name="weight"
-              value={dogData.weight}
+              type="number"
+              name="weight_min"
+              value={dogData.weight_min}
               onChange={handleChange}
               className={errors.weight ? style.error : style.success}
             />
-            <span className={errors.weight ? style.errorMsj : null}>
+            <label htmlFor="weight_max">Max</label>
+            <input
+              type="number"
+              name="weight_max"
+              value={dogData.weight_max}
+              onChange={handleChange}
+              className={errors.weight ? style.error : style.success}
+            />
+            </div>
+            <span className={errors.weight? style.errorMsj : null}>
               {errors.weight}
             </span>
           </div>
@@ -93,21 +144,33 @@ const Form = () => {
               {errors.life_span}
             </span>
           </div>
-          <div>
-          <label htmlFor="temperaments">Temperaments</label>
-            <select>
-              <option></option>
-            </select>
-            <span className={errors.life_span ? style.errorMsj : null}>
-              {errors.life_span}
-            </span>
-          </div>
+          <div className={style.containerInput}>
+              <label>Temperaments</label>
+              <select className={style.select} onChange={(e) => handleSelect(e)}>
+                {temperaments.map((temp) => {
+                  return (
+                    <option key={temp} name={temp}>
+                      {temp}
+                    </option>
+                  );
+                })}
+              </select>
+              <div>
+                {dogData.temperaments.map((e) => (
+                  <div key={e}>
+                    <button className={style.buttonDelete} onClick={() => handleDelete(e)}>x</button>
+                    <span className={style.spanTemp}>{e}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           <div className={style.containerInput}>
             <label htmlFor="image">Image URL</label>
             <input
-              type="text"
+              type="url"
               name="image"
               value={dogData.image}
+              placeholder="http://webImage.png"
               onChange={handleChange}
               className={errors.image ? style.error : style.success}
             />

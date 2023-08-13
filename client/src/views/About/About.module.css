@@ -3,4 +3,8 @@
     top: 4em;
     margin: 0 1em 1em 1em;
   }
+  .image{
+    width: 200px;
+    border-radius: 0;
+  }
   

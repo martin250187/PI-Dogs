@@ -1,20 +1,40 @@
-import { GET_DOGS, GET_DOG, ORDER, FILTER_SOURCE, FILTER_NAME } from "./actions";
+import {
+  GET_DOGS,
+  GET_DOG_DETAIL,
+  GET_DOGS_BY_NAME,
+  GET_TEMPERAMENTS,
+  ORDER_BY_NAME,
+  ORDER_BY_WEIGHT,
+  FILTER_SOURCE,
+  FILTER_TEMP,
+} from "./actions";
 
 const initialState = {
   dogs: [],
   dogDetail: [],
   dogsFilter: [],
+  temperaments: [],
+  currentPage: 1,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DOGS:
       return { ...state, dogs: action.payload, dogsFilter: action.payload };
-
-    case GET_DOG:
+    case GET_DOGS_BY_NAME:
+      return {
+        ...state,
+        dogsFilter: action.payload,
+      };
+    case GET_DOG_DETAIL:
       return { ...state, dogDetail: action.payload };
 
-    case ORDER:
-      const sortObject = [...state.dogs].sort((a, b) => {
+    case GET_TEMPERAMENTS:
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
+    case ORDER_BY_NAME:
+      const sortName = [...state.dogs].sort((a, b) => {
         if (a.name > b.name) {
           return action.payload === "A" ? 1 : -1;
         } else if (a.name < b.name) {
@@ -23,31 +43,40 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        dogsFilter: sortObject,
+        dogsFilter: sortName,
+      };
+    case ORDER_BY_WEIGHT:
+      const sortWeight = [...state.dogs].sort((a, b) => {
+        if (a.weight_min !== null && b.weight_min !== null) {
+          if (a.weight_min > b.weight_min) {
+            return action.payload === "A" ? 1 : -1;
+          } else if (a.weight_min < b.weight_min) {
+            return action.payload === "D" ? 1 : -1;
+          } else return 0;
+        }
+      });
+      return {
+        ...state,
+        dogsFilter: sortWeight,
       };
 
     case FILTER_SOURCE:
-      const filterbySource =
+      const filterBySource =
         action.payload !== "All"
-          ? [...state.dogs].filter(
-              (dog) => dog.source === action.payload
-            )
+          ? [...state.dogs].filter((dog) => dog.source === action.payload)
           : [...state.dogs];
       return {
         ...state,
-        dogsFilter: filterbySource,
+        dogsFilter: filterBySource,
       };
 
-      case FILTER_NAME:
-      const filterbyName =
-        action.payload !== ""
-          ? [...state.dogs].filter(
-              (dog) => dog.source === action.payload
-            )
-          : [...state.dogs];
+    case FILTER_TEMP:
+      const filterByTemp = action.payload !== "All" && action.payload
+      ? [...state.dogs].filter((dog) => (dog.temperaments.toLowerCase()).includes(action.payload.toLowerCase()))
+      : [...state.dogs];
       return {
         ...state,
-        dogsFilter: filterbyName,
+        dogsFilter: filterByTemp,
       };
 
     default:

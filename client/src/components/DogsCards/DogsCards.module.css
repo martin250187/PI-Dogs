@@ -2,14 +2,32 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-content: center;
+  align-content:space-between;
   flex-wrap: wrap;
   position: relative;
   top: 1em;
-  margin-left:18%;
-  margin-right: 18%;
+  margin-left:5%;
+  margin-right: 5%;
 }
 .containerBtn{
-  width: 100%;
-  margin-top: 8em;
+  margin-top: 7em;
+}
+.searchBarContainer, .toolsContainer, .amountContainer{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 0.5em 0 0;
+}
+select{
+  cursor: pointer;
+  margin: 0.5em 0 0.5em 0.5em;
+}
+span{
+  min-width: fit-content;
+  margin: 0 0 0 0.5em;
+  font-weight: bold;
+}
+h3{
+  margin: 0.5em 0 0 0;
 }

@@ -18,17 +18,18 @@
   border-radius: 0.5em;
   padding: 1em;
 }
-img{
+img {
   border-radius: 50%;
   margin-top: 0.5em;
 }
-label{
+label {
   position: relative;
   color: white;
-  width: 100%;
+  width: 50%;
   font-weight: bold;
+  margin-top:1em
 }
-.btn{
+.btn {
   position: relative;
   width: 100%;
   margin: 0.5em 0 0.5em 0;
@@ -38,26 +39,23 @@ label{
   color: white;
   border-radius: 1em;
 }
-.containerInput{
+.containerInput {
   display: flex;
   flex-direction: column;
   align-items: start;
   width: 100%;
 }
-input:focus{
+input:focus {
   border-color: 1px solid black;
   outline: 2px solid black;
 }
 
-.errorMsj{
-  color: white;
-  background-color: rgb(129, 11, 11);
-  padding: 0.5em;
-  border-radius: 1em;
-  margin-bottom: 0.5em;
+.errorMsj {
+  color: rgb(129, 11, 11);
   font-weight: bold;
+  margin: 1em 0 1em 0;
 }
-.success{
+.success {
   position: relative;
   margin: 0.5em 0 0.5em 0;
   width: 100%;
@@ -65,11 +63,33 @@ input:focus{
   right: 0.5em;
   border: 2px solid rgba(0, 128, 0, 0.8);
 }
-.error{
+.error {
   position: relative;
   margin: 0.5em 0 0.5em 0;
   width: 100%;
   padding: 0.3em;
   right: 0.5em;
   border: 2px solid rgba(129, 11, 11, 0.8);
+}
+.select {
+  padding: 0.5em;
+  margin: 0.5em 0 0.5em 0;
+}
+.buttonDelete {
+  margin-left: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.spanTemp {
+  margin-left: 0.5em;
+}
+.heightInput {
+  display: flex;
+  position: relative;
+  border: 0.5px solid lightgrey;
+  padding: 1em;
+}
+h4{
+  margin: 0.5em 0 0.5em 0;
+  color: white;
 }

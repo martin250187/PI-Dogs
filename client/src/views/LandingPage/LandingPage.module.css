@@ -1,0 +1,66 @@
+.fullContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(83, 83, 83, 0.6);
+  border-radius: 10px;
+  margin: 15%;
+  padding: 20px;
+}
+.title{
+    font-size: 60px;
+    text-shadow: white 1px 0 10px;
+    font-weight: bold;
+}
+.btnAccess {
+  display: inline-block;
+  border-radius: 4px;
+  border: none;
+  color: #ffffff;
+  background-color: #333333;
+  text-align: center;
+  font-size: 25px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.btnAccess span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btnAccess span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btnAccess:hover span {
+  padding-right: 25px;
+}
+
+.btnAccess:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.btnAccess:hover {
+  box-shadow: 0 16px 16px 0 rgba(255, 255, 255, 0.5),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}

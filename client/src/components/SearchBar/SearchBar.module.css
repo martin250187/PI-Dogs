@@ -1,0 +1,10 @@
+.input{
+    margin: 0 0.5em 0 0.5em;
+    padding: 0.5em;
+    width: 200px;
+
+}
+.btnSearch{
+    padding: 0.5em;
+    cursor: pointer;
+}

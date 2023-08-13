@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./Detail.module.css";
-import { getDog } from "../../redux/actions";
+import { getDogDetail } from "../../redux/actions";
 
 const Detail = () => {
   const { id } = useParams(); //HOOKS
@@ -13,7 +13,7 @@ const Detail = () => {
 
   console.log(dog);
   useEffect(() => {
-    dispatch(getDog(id));
+    dispatch(getDogDetail(id));
   }, [id]);
 
   return (
@@ -22,8 +22,11 @@ const Detail = () => {
         <DogCardDetail
           key={dog.id}
           name={dog.name}
-          height={dog.height}
-          weight={dog.weight}
+          breed_group={dog.breed_group}
+          height_min={dog.height_min}
+          height_max={dog.height_max}
+          weight_min={dog.weight_min}
+          weight_max={dog.weight_max}
           life_span={dog.life_span}
           temperaments={dog.temperaments}
           source={dog.source}

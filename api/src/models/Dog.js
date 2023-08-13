@@ -8,15 +8,18 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4(),
       },
       name: { type: DataTypes.STRING, allowNull: false },
-      height: { type: DataTypes.STRING },
-      weight: { type: DataTypes.STRING },
-      life_span: { type: DataTypes.STRING },
-      image: { type: DataTypes.STRING },
-      source:{ type: DataTypes.STRING, defaultValue: "postgres" },
+      height_min: { type: DataTypes.INTEGER, allowNull: false },
+      height_max: { type: DataTypes.INTEGER, allowNull: false },
+      weight_min: { type: DataTypes.INTEGER, allowNull: false },
+      weight_max: { type: DataTypes.INTEGER, allowNull: false },
+      life_span: { type: DataTypes.STRING, allowNull: true },
+      image: { type: DataTypes.STRING, allowNull: true },
+      source: { type: DataTypes.STRING, defaultValue: "postgres" },
     },
     { timestamps: false }
   );
