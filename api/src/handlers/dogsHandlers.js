@@ -29,7 +29,7 @@ const getDogHandler = async (req, res) => {
 
 const createDogHandler = async (req, res) => {
   try {
-    const { name, height_min, height_max, weight_min, weight_max, life_span, image } = req.body;
+    const { name, height_min, height_max, weight_min, weight_max, life_span, temperaments, image } = req.body;
     await createDog({
       name,
       height_min,
@@ -37,6 +37,7 @@ const createDogHandler = async (req, res) => {
       weight_min,
       weight_max,
       life_span,
+      temperaments,
       image,
     });
     res.status(201).send("Your dog has been created successfully");

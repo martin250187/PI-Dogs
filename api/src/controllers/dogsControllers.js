@@ -20,30 +20,70 @@ const cleanArray = (arr) =>
       source: "api",
     };
   });
+const cleanArrayPostgres = (arr) =>
+  arr.map((e) => {
+    return {
+      id: e.id,
+      name: e.name,
+      height_min: e.height_min,
+      height_max: e.height_max,
+      weight_min: e.weight_min,
+      weight_max: e.weight_max,
+      life_span: e.life_span,
+      image: e.image,
+      source: "postgres",
+      temperaments: e.dataValues.Temperaments.map((elem) => elem.name).join(
+        ", "
+      ),
+    };
+  });
 
 const getDogs = async () => {
   const dogsApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data;
-  const dogsPostgres = await Dog.findAll();
+  //console.log(dogsApi);
+  const dogsPostgres = await Dog.findAll({
+    include: [
+      {
+        model: Temperament,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
   const dogsApiClean = cleanArray(dogsApi);
-
-  return [...dogsPostgres, ...dogsApiClean];
+  const dogsPostgresClean = cleanArrayPostgres(dogsPostgres);
+  //console.log(dogsPostgresClean);
+  return [...dogsPostgresClean, ...dogsApiClean];
 };
 
 const getDogsByName = async (name) => {
   const dogsApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data;
   const dogsApiClean = cleanArray(dogsApi);
   const dogsPostgres = await Dog.findAll({
+    include: [
+      {
+        model: Temperament,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
     where: {
       name: {
-        [Op.like]: `%${name}%`,
+        [Op.iLike]: `%${name}%`,
       },
     },
   });
+  const dogsPostgresClean = cleanArrayPostgres(dogsPostgres);
   const filteredApi = dogsApiClean.filter((dog) =>
     dog.name.toLowerCase().includes(name.toLowerCase())
   );
+  console.log(dogsPostgresClean);
 
-  return [...dogsPostgres, ...filteredApi];
+  return [...dogsPostgresClean, ...filteredApi];
 };
 
 const getDogById = async (id, source) => {
@@ -53,32 +93,38 @@ const getDogById = async (id, source) => {
       (e) => e.id == id
     );
     dog = cleanArray(dogApi);
-  } else
-    dog = [
+  } else {
+    const dogPostgres = [
       await Dog.findByPk(id, {
         include: { model: Temperament, attributes: ["name"] },
       }),
     ];
-
+    dog = cleanArrayPostgres(dogPostgres);
+  }
   return dog;
 };
 
 const createDog = async ({
   name,
-  height,
-  weight,
+  height_min,
+  height_max,
+  weight_min,
+  weight_max,
   life_span,
   temperaments,
   image,
 }) => {
   const newDog = await Dog.create({
     name,
-    height,
-    weight,
+    height_min,
+    height_max,
+    weight_min,
+    weight_max,
     life_span,
-    temperaments,
     image,
   });
+  temperaments.map(async (el) => await newDog.addTemperament(el));
+  //await newDog.addTemperaments(temperaments);
   return newDog;
 };
 

@@ -12,4 +12,4 @@ data.map((x) => {
     }
   });
 }})
-console.log(results);
+console.log(data[0]);
