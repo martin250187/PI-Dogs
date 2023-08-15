@@ -71,14 +71,20 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_TEMP:
-      const filterByTemp = action.payload !== "All" && action.payload
-      ? [...state.dogs].filter((dog) => (dog.temperaments.toLowerCase()).includes(action.payload.toLowerCase()))
-      : [...state.dogs];
+      const filterTemp = [...state.dogs].filter((dog) => {
+        if (dog.temperaments) {
+          const tempArray = dog.temperaments
+            .split(",")
+            .map((temp) => temp.trim());
+          return tempArray.includes(action.payload);
+        } else {
+          return false;
+        }
+      });
       return {
         ...state,
-        dogsFilter: filterByTemp,
+        dogsFilter: filterTemp,
       };
-
     default:
       return { ...state };
   }

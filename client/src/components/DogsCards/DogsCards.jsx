@@ -16,7 +16,8 @@ import SearchBar from "../SearchBar/SearchBar";
 const DogsCards = () => {
   //const dogs = useSelector((state) => state.dogs);
   const dogsFilter = useSelector((state) => state.dogsFilter);
-  console.log(dogsFilter);
+  //console.log(dogsFilter[0]);
+  
   let cant = dogsFilter.length;
   const dispatch = useDispatch();
 
@@ -27,7 +28,7 @@ const DogsCards = () => {
     dispatch(orderDogsByWeight(event.target.value));
   };
   const handleFilterSource = (event) => {
-    //dispatch(filterBySource(event.target.value));
+    dispatch(filterBySource(event.target.value));
   };
 
   const temperaments = useSelector((state) => state.temperaments).sort(
@@ -44,9 +45,7 @@ const DogsCards = () => {
     dispatch(filterByTemperament(event.target.value));
     //console.log(event.target.value);
   };
-
-  /* Pagination */
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -116,7 +115,7 @@ const DogsCards = () => {
             key={dog.id}
             id={dog.id}
             name={dog.name}
-            temperament={dog.temperaments}
+            temperaments={dog.temperaments}
             weight={dog.weight_min + " - " + dog.weight_max + " [kg.]"}
             image={dog.image}
           />

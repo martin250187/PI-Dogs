@@ -4,6 +4,7 @@
   justify-content: normal;
   align-items: center;
   overflow: hidden; /* Oculta el desbordamiento */
+  margin-top: 5em;
 }
 .dog {
   width: 100px;
@@ -26,5 +27,10 @@
   }
   100% {
     transform: translateX(calc(100vw));
+  }
+}
+@media (max-width: 400px) {
+  .dogContainer {
+    margin-top: 1em;
   }
 }

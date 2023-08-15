@@ -6,7 +6,7 @@ const About = () => {
       <h1>PROYECTO INDIVIDUAL HENRY</h1>
       <h2>GETTE, FERNANDO MARTIN (Cohorte 13a)</h2>
       <hr />
-      <img src={image} alt="" srcset="" className={style.image} />
+      <img src={image} alt="Image Not Found" className={style.image} />
       <hr />
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam</p>
       <ul>
